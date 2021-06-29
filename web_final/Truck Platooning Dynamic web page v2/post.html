@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Truck Platooning</title>
+    <link rel="icon" type="image/png" href="img/icon.png" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="css/thumbnail-gallery.css">
+    <link href="css/top.css" rel="stylesheet">
+
+    <script>window.onload = function () {
+            document.getElementById("Save").onclick = function fun() {
+                var x = document.forms["myForm"]["ip_address"].value;
+                var Url = "";// tunde link
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, true);
+                xhr.send(x);
+                xhr.onreadystatechange = processRequest;
+                function processRequest(e) {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // alert(xhr.responseText.headers.Host);
+                        var response1 = JSON.parse(xhr.responseText);
+                        document.getElementById("origin").innerHTML = response1.origin;
+                        document.getElementById("url").innerHTML = response1.url;
+                        document.getElementById("data").innerHTML = response1.data;
+                    }
+                }
+            }
+        }</script>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #000000;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #000000;
+            }
+
+            #customers tr:hover {
+                background-color: #ffffff;
+            }
+
+            #customers td {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #b3e6ff;
+                color: Black;
+            }
+    </style>
+</head>
+<body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <a href="dynamic.html" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+    <a href="index_web_interface.html" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> Home</a>
+    <div class="container gallery-container">
+
+        <h1>Truck Platooning Interface</h1>
+
+        <p class="page-description text-center">The Invincibles</p>
+
+        <div class="tz-gallery">
+
+            <div class="row">
+
+                <!-- <h2>-->
+                <center>
+
+                    <br><br>
+                    <form name="myForm">
+                        <input type="text" name="ip_address" />
+                        <input type="button" id="Save" onclick="f1()" value="Send" />
+                    </form>
+                    <br><br>
+                    <table id="customers">
+                        <tr><td>data :</td><td id="data"></td></tr>
+                        <tr><td>origin :</td><td id="origin"></td></tr>
+                        <tr><td>url :</td><td id="url"></td></tr>
+                    </table>
+                </center>
+
+                <!-- </h2> -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script>baguetteBox.run('.tz-gallery');</script>
+    <script src="js/top.js"></script>
+</body>
+</html>
