@@ -18,7 +18,29 @@
         <script src="cdns/ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="cdns/cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="cdns/maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-        <script src="script.js"></script>
+        <script type="text/javascript">var HttpClient = function () {
+            this.get = function (aUrl, aCallback) {
+                var anHttpRequest = new XMLHttpRequest();
+                anHttpRequest.onreadystatechange = function () {
+                    if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                        aCallback(anHttpRequest.responseText);
+                }
+                anHttpRequest.open("GET", aUrl, true);
+                 anHttpRequest.send(null);
+            }
+        }
+        var theurl = 'http://192.168.0.252:6244/v1/platoon/api/service/leader'; // tunde ip for api
+        var client = new HttpClient();
+        client.get(theurl, function (response) {
+            var response1 = JSON.parse(response);
+            console.log(response1);
+            // alert(response);
+            document.getElementById("Truck_ID").innerHTML = response1.id;
+            document.getElementById("Truck_Speed").innerHTML = response1.speed;
+            document.getElementById("Leader_Follower").innerHTML = response1.role;
+            document.getElementById("Fuel").innerHTML = response1.fuel;
+            document.getElementById("Status").innerHTML = response1.status;
+        });</script>
 
     </head>
     <body class="sb-nav-fixed">
@@ -114,15 +136,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-md-10 mx-auto" id="truckItems">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">--X-- Failed Trucks</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#failedTrucksDiv" onclick="hide_show_div('truckItemsDiv', 'failedTrucksDiv')">View Failed Trucks</a>
-                        <div class="small text-white"><i class="fa fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
+        
             <div class="col-xl-6 col-md-10 mx-auto" id="truckItems">
                 <div class="card bg-warning text-white mb-4">
                     <div class="card-body">Lead Truck Status</div>

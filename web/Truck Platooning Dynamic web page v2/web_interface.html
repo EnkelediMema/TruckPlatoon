@@ -23,24 +23,20 @@
                         aCallback(anHttpRequest.responseText);
                 }
                 anHttpRequest.open("GET", aUrl, true);
-                anHttpRequest.send(null);
+                 anHttpRequest.send(null);
             }
         }
-        var theurl = ''; // tunde ip for api
+        var theurl = 'http://192.168.0.252:6244/v1/platoon/api/service/leader'; // tunde ip for api
         var client = new HttpClient();
         client.get(theurl, function (response) {
             var response1 = JSON.parse(response);
+            console.log(response1);
             // alert(response);
-            document.getElementById("statusCode").innerHTML = response1.name + ", " + response1.statusCode;
-            document.getElementById("statusCode").innerHTML = response1.statusCode;
-            document.getElementById("statusMessage").innerHTML = response1.statusMessage;
-            document.getElementById("Truck_ID").innerHTML = response1.Truck_ID;
-            document.getElementById("Truck_Speed").innerHTML = response1.TRuck_Speed;
-            document.getElementById("Leader_Follower").innerHTML = response1.Leader_Follower;
-            document.getElementById("Fuel").innerHTML = response1.Fuel;
-            document.getElementById("Other").innerHTML = response1.Other;
-            document.getElementById("Other").innerHTML = response1.Other;
-            document.getElementById("Other").innerHTML = response1.Other;
+            document.getElementById("Truck_ID").innerHTML = response1.id;
+            document.getElementById("Truck_Speed").innerHTML = response1.speed;
+            document.getElementById("Leader_Follower").innerHTML = response1.role;
+            document.getElementById("Fuel").innerHTML = response1.fuel;
+            document.getElementById("Status").innerHTML = response1.status;
         });</script>
     <style>
         #customers {
@@ -92,15 +88,12 @@
 
                     <center>
                         <table id="customers">
-                            <tr><td>statusCode :</td><td id="statusCode"></td></tr>
-                            <tr><td>statusMessage :</td><td id="statusMessage"></td></tr>
                             <tr><td>Truck ID:</td><td id="Truck_ID"></td></tr>
                             <tr><td>Truck Speed :</td><td id="Truck_Speed"></td></tr>
                             <tr><td>Leader or Follower :</td><td id="Leader_Follower"></td></tr>
                             <tr><td>Fuel:</td><td id="Fuel"></td></tr>
-                            <tr><td>Other :</td><td id="Other"></td></tr>
-                            <tr><td>Other :</td><td id="other"></td></tr>
-                            <tr><td>Other :</td><td id="other"></td></tr>
+                            <tr><td>Status :</td><td id="Status"></td></tr>
+                            
 
                         </table>
 
