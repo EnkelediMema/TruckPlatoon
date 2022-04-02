@@ -1,3 +1,3 @@
-## TruckPlatoon
+# TruckPlatoon
 
-# University Project
+## University Project
